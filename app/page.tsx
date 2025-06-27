@@ -1,101 +1,81 @@
-import Image from "next/image";
+'use client';
+
+import React from 'react';
+import { ThemeProvider } from '@/contexts/theme-context';
+import { Layout } from '@/components/layout/layout';
+import { TaskManager } from '@/components/tasks/task-manager';
+import { PostsList } from '@/components/api/posts-list';
+import { ComponentShowcase } from '@/components/demo/component-showcase';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <ThemeProvider>
+      <Layout>
+        <div className="py-16 px-2 md:px-0 bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-950 dark:to-blue-950 min-h-screen">
+          {/* Hero Section */}
+          <section className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-10 mb-20">
+            <div className="flex-1">
+              <h1 className="text-5xl md:text-7xl font-extrabold text-left text-blue-900 dark:text-blue-200 leading-tight mb-6">
+                Organize Your <span className="underline decoration-wavy decoration-blue-400 dark:decoration-blue-600">Workflow</span>
+              </h1>
+              <p className="text-lg md:text-2xl text-left text-blue-700 dark:text-blue-300 mb-8">
+                Experience a fresh approach to productivity. Manage tasks, explore API data, and preview custom components—all in one place.
+              </p>
+              <div className="flex gap-4">
+                <a
+                  href="#tasks"
+                  className="px-7 py-3 bg-blue-900 hover:bg-blue-700 text-white rounded-md font-semibold shadow transition-all duration-150"
+                >
+                  Go to Tasks
+                </a>
+                <a
+                  href="#api-data"
+                  className="px-7 py-3 border-2 border-blue-900 dark:border-blue-300 text-blue-900 dark:text-blue-200 rounded-md font-semibold hover:bg-blue-100 dark:hover:bg-blue-900 transition-all duration-150"
+                >
+                  Explore API Data
+                </a>
+              </div>
+            </div>
+            <div className="flex-1 hidden md:flex justify-center">
+              <div className="w-80 h-80 rounded-3xl bg-gradient-to-tr from-blue-200 via-blue-400 to-blue-600 dark:from-blue-900 dark:via-blue-800 dark:to-blue-700 shadow-2xl flex items-center justify-center">
+                <span className="text-7xl text-white font-black opacity-30 select-none">📝</span>
+              </div>
+            </div>
+          </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          {/* Timeline Navigation */}
+          <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-8 mb-16">
+            <div className="hidden md:flex flex-col items-center mr-8">
+              <div className="w-2 h-2 bg-blue-700 rounded-full mb-8"></div>
+              <div className="flex-1 w-1 bg-gradient-to-b from-blue-300 via-blue-200 to-blue-100 dark:from-blue-800 dark:via-blue-900 dark:to-blue-950"></div>
+              <div className="w-2 h-2 bg-blue-700 rounded-full mt-8"></div>
+              <div className="flex-1 w-1 bg-gradient-to-b from-blue-300 via-blue-200 to-blue-100 dark:from-blue-800 dark:via-blue-900 dark:to-blue-950"></div>
+              <div className="w-2 h-2 bg-blue-700 rounded-full mt-8"></div>
+              <div className="flex-1 w-1 bg-gradient-to-b from-blue-300 via-blue-200 to-blue-100 dark:from-blue-800 dark:via-blue-900 dark:to-blue-950"></div>
+              <div className="w-2 h-2 bg-blue-700 rounded-full mt-8"></div>
+            </div>
+            <div className="flex-1 space-y-24">
+              {/* Task Manager Section */}
+              <section id="tasks" className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 border border-blue-100 dark:border-blue-900">
+                <h2 className="text-2xl font-bold text-blue-900 dark:text-blue-200 mb-4">Task Manager</h2>
+                <TaskManager />
+              </section>
+
+              {/* API Data Section */}
+              <section id="api-data" className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 border border-blue-100 dark:border-blue-900">
+                <h2 className="text-2xl font-bold text-blue-900 dark:text-blue-200 mb-4">API Data</h2>
+                <PostsList />
+              </section>
+
+              {/* Components Section */}
+              <section id="components" className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 border border-blue-100 dark:border-blue-900">
+                <h2 className="text-2xl font-bold text-blue-900 dark:text-blue-200 mb-4">Component Showcase</h2>
+                <ComponentShowcase />
+              </section>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </Layout>
+    </ThemeProvider>
   );
 }
