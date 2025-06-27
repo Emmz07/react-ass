@@ -2,15 +2,16 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-export interface TextareaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+// Use a type alias instead of an empty interface
+type InputProps = React.InputHTMLAttributes<HTMLInputElement>
 
-const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, ...props }, ref) => {
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, ...props }, ref) => {
     return (
-      <textarea
+      <input
+        type={type}
         className={cn(
-          "flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
           className
         )}
         ref={ref}
@@ -19,6 +20,6 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     )
   }
 )
-Textarea.displayName = "Textarea"
+Input.displayName = "Input"
 
-export { Textarea }
+export { Input }
